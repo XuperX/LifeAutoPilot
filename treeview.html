@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+ul, #myUL {
+  list-style-type: none;
+}
+
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+.caret {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+}
+
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */
+  transform: rotate(90deg);
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.clicked {
+  color: purple;
+}
+</style>
+</head>
+<body>
+
+<h2>Tree View</h2>
+<p>A tree view represents a hierarchical view of information, where each item can have a number of subitems.</p>
+<p>Click on the arrow(s) to open or close the tree branches.</p>
+
+<ul id="myUL"></ul>
+
+<script>
+// Function to create the tree view
+function createTreeView(data, parentElement) {
+  const ul = document.createElement('ul');
+  ul.classList.add('nested');
+
+  for (const key in data) {
+    const li = document.createElement('li');
+    if (typeof data[key] === 'object' && Object.keys(data[key]).length > 0) {
+      const span = document.createElement('span');
+      span.classList.add('caret');
+      span.textContent = key;
+      li.appendChild(span);
+      createTreeView(data[key], li);
+    } else {
+      li.textContent = key;
+    }
+    ul.appendChild(li);
+  }
+
+  parentElement.appendChild(ul);
+}
+
+// Fetch the JSON data and generate the tree view
+fetch('myLife.json')
+  .then(response => response.json())
+  .then(data => {
+    const treeRoot = document.getElementById('myUL');
+    for (const key in data) {
+      const li = document.createElement('li');
+      const span = document.createElement('span');
+      span.classList.add('caret');
+      span.textContent = key;
+      li.appendChild(span);
+      createTreeView(data[key], li);
+      treeRoot.appendChild(li);
+    }
+
+    // Add event listeners to toggle tree branches and change color on click
+    const toggler = document.getElementsByClassName('caret');
+    for (let i = 0; i < toggler.length; i++) {
+      toggler[i].addEventListener('click', function() {
+        this.parentElement.querySelector('.nested').classList.toggle('active');
+        this.classList.toggle('caret-down');
+        this.classList.add('clicked'); // Change color to purple on click
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
