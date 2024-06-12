@@ -1,17 +1,310 @@
 {
-  "Beverages": {
-    "Water": {},
-    "Coffee": {},
-    "Tea": {
-      "Black Tea": {},
-      "White Tea": {},
-      "Green Tea": {
-        "Sencha": {},
-        "Gyokuro": {},
-        "Matcha": {},
-        "Pi Lo Chun": {}
-      }
+  "nodes": {
+    "root": {
+      "name": "Are you okay?",
+      "description": "",
+      "image": "images/okay.jpg",
+      "children": ["yes", "notQuite", "veryNotOkay"]
+    },
+    "yes": {
+      "name": "Yes",
+      "description": "I feel I can do something today.",
+      "image": "",
+      "children": ["great"]
+    },
+    "great": {
+      "name": "Great! We should go through a routine, but before that can you find a piece of pen and paper and list what are the top priorities today?",
+      "description": "",
+      "image": "",
+      "children": ["tasks"]
+    },
+    "tasks": {
+      "name": "Now look at your list of tasks, cross out half of them. That are what we aim to do today.",
+      "description": "As long as they are done we are fine.",
+      "image": "",
+      "children": ["time"]
+    },
+    "time": {
+      "name": "What is the time now?",
+      "description": "",
+      "image": "",
+      "children": ["morning", "Noon", "Afternoon", "Evening"]
+    },
+    "morning": {
+      "name": "Morning",
+      "description": "Congrats on trying this in the early morning. Let's first do some routine to make sure you are fully prepared (and no excuses). It doesn't matter whether you start at 6am or 10am. As long as you start, it is fine.",
+      "image": "images/superb.jpeg",
+      "children": ["8am", "10am"]
+    },
+    "8am": {
+      "name": "It is EIGHT AM",
+      "description": "Great! Now you need to do these things: ",
+      "image": "",
+      "children": ["Shower", "Coffee", "NoBreakfast"]
+    },
+    "Shower": {
+      "name": "Go Shower",
+      "description": "And put on your favorite perfume!",
+      "image": "",
+      "children": []
+    },
+    "Coffee": {
+      "name": "Make a cup of coffee",
+      "description": "Or energy drink if you are too tired",
+      "image": "",
+      "children": []
+    },
+    "NoBreakfast": {
+      "name": "No breakfast",
+      "description": "You just think you are hungry. But breakfast will put you to sleep",
+      "image": "images/brekkie.jpg",
+      "children": []
+    },
+    "Afternoon": {
+      "name": "Afternoon",
+      "description": "Haha I know why you are here. Caught you procrastinating. But it is okay. Let's see what we can do.",
+      "image": "images/ha-haha.gif",
+      "children": ["procrastinate"]
+    },
+    "procrastinate": {
+      "name": "My dear procrastinater?",
+      "description": "Do you have a pen, pencil, have gone to the bathroom, and have a glass of water? If yes, let us start.",
+      "image": "",
+      "children": ["kickstarter"]
+    },
+    "kickstarter": {
+      "name": "Kickstarter",
+      "description": "Now let's go to overleaf and write a paragraph of what is happening recently. ",
+      "image": "",
+      "children": ["list"]
+    },
+    "todolist": {
+      "name": "Write",
+      "description": "Write a paragraph of what is happening recently. ",
+      "image": "",
+      "children": ["tasks"]
+    },
+    "Evening": {
+      "name": "Evening",
+      "description": "You can still make progress. Choose a task and give it your best effort.",
+      "image": "",
+      "children": []
+    },
+    "noTasks": {
+      "name": "No, I want to relax",
+      "description": "That's okay. Taking a break is important too. Enjoy your time!",
+      "image": "",
+      "children": []
+    },
+    "notQuite": {
+      "name": "Not quite. I am a bit stressed and not sure what to do",
+      "description": "",
+      "image": "",
+      "children": ["help"]
+    },
+    "help": {
+      "name": "I can help you get up and improve things a little bit. Would you like to let me help you?",
+      "description": "",
+      "image": "",
+      "children": ["helpYes", "helpNo"]
+    },
+    "helpYes": {
+      "name": "Yes",
+      "description": "Let's start by identifying what's stressing you out.",
+      "image": "",
+      "children": ["workStress", "personalStress", "generalStress"]
+    },
+    "workStress": {
+      "name": "Work stress",
+      "description": "",
+      "image": "",
+      "children": ["urgentTask", "break"]
+    },
+    "urgentTask": {
+      "name": "Break it down into smaller tasks. What is the most urgent task?",
+      "description": "",
+      "image": "",
+      "children": []
+    },
+    "break": {
+      "name": "Take a short break. Have a cup of tea or a walk. Then get back to it.",
+      "description": "",
+      "image": "",
+      "children": []
+    },
+    "personalStress": {
+      "name": "Personal stress",
+      "description": "",
+      "image": "",
+      "children": ["mainIssue", "reachOut"]
+    },
+    "mainIssue": {
+      "name": "Take deep breaths and try to relax. Can you identify the main issue?",
+      "description": "",
+      "image": "",
+      "children": []
+    },
+    "reachOut": {
+      "name": "Reach out to a friend or family member. Talking about it might help.",
+      "description": "",
+      "image": "",
+      "children": []
+    },
+    "generalStress": {
+      "name": "General stress",
+      "description": "Have you eaten today?",
+      "image": "",
+      "children": ["eatenNo", "eatenYes"]
+    },
+    "eatenNo": {
+      "name": "No",
+      "description": "Get a healthy snack or meal. Your body needs fuel to cope with stress.",
+      "image": "",
+      "children": []
+    },
+    "eatenYes": {
+      "name": "Yes",
+      "description": "Great. Have you taken any breaks today?",
+      "image": "",
+      "children": ["breakNo", "breakYes"]
+    },
+    "breakNo": {
+      "name": "No",
+      "description": "Take a 5-minute break to stretch or walk around.",
+      "image": "",
+      "children": []
+    },
+    "breakYes": {
+      "name": "Yes",
+      "description": "Okay. Let's focus on one small task at a time. What is the easiest task you can start with?",
+      "image": "",
+      "children": []
+    },
+    "helpNo": {
+      "name": "No, I just want to be a broken kid",
+      "description": "Okay. It is fine to take a break and rest. I am here for you.",
+      "image": "",
+      "children": ["sunny"]
+    },
+    "sunny": {
+      "name": "Is it sunny outside?",
+      "description": "",
+      "image": "",
+      "children": ["sunnyYes", "sunnyNo"]
+    },
+    "sunnyYes": {
+      "name": "Yes",
+      "description": "I think you should go outside and get some fresh air. It will help you feel better.",
+      "image": "",
+      "children": ["goOutside"]
+    },
+    "goOutside": {
+      "name": "Okay. I will go outside and get some fresh air.",
+      "description": "I am glad you are taking care of yourself. I am here for you if you need me.",
+      "image": "",
+      "children": []
+    },
+    "sunnyNo": {
+      "name": "No",
+      "description": "Have you showered today?",
+      "image": "",
+      "children": ["showerNo", "showerYes"]
+    },
+    "showerNo": {
+      "name": "No",
+      "description": "Could you please get a shower? That would make you feel better.",
+      "image": "",
+      "children": []
+    },
+    "showerYes": {
+      "name": "Yes",
+      "description": "Great. How about a warm drink and a cozy moment?",
+      "image": "",
+      "children": []
+    },
+    "veryNotOkay": {
+      "name": "I am very not okay. I am falling apart",
+      "description": "",
+      "image": "",
+      "children": ["whatHappened"]
+    },
+    "whatHappened": {
+      "name": "What happened?",
+      "description": "",
+      "image": "",
+      "children": ["workStressVery", "relationshipStress", "socialStress"]
+    },
+    "workStressVery": {
+      "name": "Work stress. I am very stressed at the moment.",
+      "description": "",
+      "image": "",
+      "children": ["pressingIssue", "delegate", "break10"]
+    },
+    "pressingIssue": {
+      "name": "Let's take a step back and breathe. What is the most pressing issue?",
+      "description": "",
+      "image": "",
+      "children": []
+    },
+    "delegate": {
+      "name": "Can you delegate or ask for help with any tasks?",
+      "description": "",
+      "image": "",
+      "children": []
+    },
+    "break10": {
+      "name": "Take a 10-minute break. Try a relaxation technique or a quick walk.",
+      "description": "",
+      "image": "",
+      "children": []
+    },
+    "relationshipStress": {
+      "name": "Relationship stress. I am having a hard time with my partner.",
+      "description": "",
+      "image": "",
+      "children": ["talkPartner", "writeFeelings", "timeForSelf"]
+    },
+    "talkPartner": {
+      "name": "Have you talked to your partner about how you feel?",
+      "description": "",
+      "image": "",
+      "children": []
+    },
+    "writeFeelings": {
+      "name": "Would it help to write down your feelings before talking?",
+      "description": "",
+      "image": "",
+      "children": []
+    },
+    "timeForSelf": {
+      "name": "Take some time for yourself. What activity makes you feel calm?",
+      "description": "",
+      "image": "",
+      "children": []
+    },
+    "socialStress": {
+      "name": "Social stress. I am feeling very lonely.",
+      "description": "",
+      "image": "",
+      "children": ["reachOutFriend", "joinGroup", "hobby"]
+    },
+    "reachOutFriend": {
+      "name": "Reach out to a friend or family member you trust.",
+      "description": "",
+      "image": "",
+      "children": []
+    },
+    "joinGroup": {
+      "name": "Consider joining a group or community with similar interests.",
+      "description": "",
+      "image": "",
+      "children": []
+    },
+    "hobby": {
+      "name": "Engage in a hobby or activity you enjoy. It can help distract and soothe you.",
+      "description": "",
+      "image": "",
+      "children": []
     }
   }
 }
-

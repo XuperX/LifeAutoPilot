@@ -44,64 +44,90 @@ ul, #myUL {
 .clicked {
   color: purple;
 }
+
+.description {
+  font-style: italic;
+  color: gray;
+}
+
+img {
+  max-width: 100px;
+  margin-top: 10px;
+}
 </style>
 </head>
 <body>
 
-<h2>Tree View</h2>
-<p>A tree view represents a hierarchical view of information, where each item can have a number of subitems.</p>
+<h2>AutoPilot</h2>
+<p>Daily choices made easy.</p>
 <p>Click on the arrow(s) to open or close the tree branches.</p>
 
 <ul id="myUL"></ul>
 
 <script>
-// Function to create the tree view
-function createTreeView(data, parentElement) {
-  const ul = document.createElement('ul');
-  ul.classList.add('nested');
-
-  for (const key in data) {
-    const li = document.createElement('li');
-    if (typeof data[key] === 'object' && Object.keys(data[key]).length > 0) {
-      const span = document.createElement('span');
-      span.classList.add('caret');
-      span.textContent = key;
-      li.appendChild(span);
-      createTreeView(data[key], li);
-    } else {
-      li.textContent = key;
-    }
-    ul.appendChild(li);
+function createTreeView(nodeId, data, parentElement) {
+  const node = data[nodeId];
+  if (!node) {
+    console.error(`Node with id ${nodeId} not found in data.`);
+    return;
   }
 
-  parentElement.appendChild(ul);
+  const li = document.createElement('li');
+
+  const span = document.createElement('span');
+  span.classList.add('caret');
+  span.textContent = node.name;
+
+  const description = document.createElement('p');
+  description.classList.add('description');
+  description.textContent = node.description;
+
+  li.appendChild(span);
+  li.appendChild(description);
+
+  if (node.image) {
+    const img = document.createElement('img');
+    img.src = node.image;
+    li.appendChild(img);
+  }
+
+  if (node.children.length > 0) {
+    const ul = document.createElement('ul');
+    ul.classList.add('nested');
+    node.children.forEach(childId => {
+      createTreeView(childId, data, ul);
+    });
+    li.appendChild(ul);
+  }
+
+  parentElement.appendChild(li);
 }
 
-// Fetch the JSON data and generate the tree view
 fetch('myLife.json')
-  .then(response => response.json())
-  .then(data => {
-    const treeRoot = document.getElementById('myUL');
-    for (const key in data) {
-      const li = document.createElement('li');
-      const span = document.createElement('span');
-      span.classList.add('caret');
-      span.textContent = key;
-      li.appendChild(span);
-      createTreeView(data[key], li);
-      treeRoot.appendChild(li);
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
     }
+    return response.json();
+  })
+  .then(data => {
+    if (!data.nodes) {
+      throw new Error('Invalid JSON structure: Missing "nodes" key.');
+    }
+    const treeRoot = document.getElementById('myUL');
+    createTreeView('root', data.nodes, treeRoot);
 
-    // Add event listeners to toggle tree branches and change color on click
+    // Add event listeners after the DOM is fully populated
     const toggler = document.getElementsByClassName('caret');
     for (let i = 0; i < toggler.length; i++) {
       toggler[i].addEventListener('click', function() {
         this.parentElement.querySelector('.nested').classList.toggle('active');
         this.classList.toggle('caret-down');
-        this.classList.add('clicked'); // Change color to purple on click
+        this.classList.add('clicked');
       });
     }
-  });
+  })
+  .catch(error => console.error('Error fetching the JSON data:', error));
 </script>
 
 </body>
